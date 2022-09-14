@@ -1,0 +1,67 @@
+﻿@model Forms.Models.CyberAttack
+
+@{
+    ViewData["Title"] = "NewCyberAttack";
+   
+}
+<style>
+    div {
+        table-layout: fixed;
+    
+        overflow: hidden;
+        text-overflow: Ellipsis;
+        Word-wrap: break-Word;
+    }
+</style>
+
+<h2>Siber Olay Bildirimi</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="NewCyberAttack">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+          
+          
+            <div class="form-group">
+                <label asp-for="AttackId" class="control-label"></label>
+                <select asp-for="AttackId" class="form-control" asp-items="ViewBag.AttackId"></select>
+                <span asp-validation-for="AttackId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="SystemOutage" class="control-label">Sistem Kesintisi Oldu mu?</label>
+
+                <select asp-for="SystemOutage" class="form-control">
+                    <option value="True">Evet </option>
+                    <option value="False">Hayır </option>
+                </select>
+                <span asp-validation-for="SystemOutage" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="StartDate" class="control-label">Tahmini Başlangıç Zamanı</label>
+                <input asp-for="StartDate" class="form-control" />
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DetectionDate" class="control-label">Tespit Edildiği Zaman</label>
+                <input asp-for="DetectionDate" class="form-control" />
+                <span asp-validation-for="DetectionDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label">Eklemek İstedikleriniz</label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Oluştur" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="btn btn-dribbble" asp-action="CyberAttack">Geri</a>
+</div>
+

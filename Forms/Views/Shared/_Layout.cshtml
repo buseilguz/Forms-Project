@@ -1,0 +1,152 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Forms</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <style>
+        button:focus {
+            outline: 0;
+        }
+
+        .navbar .dropdown-menu .form-control {
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Forms</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <div class="navbar-nav flex-grow-1">
+
+                        @{
+                            string role = User.FindFirstValue(ClaimTypes.Role).ToString();
+                            if (role == "Admin")
+                            {
+                                <div class="nav-item">
+                                    <a class="nav-link text-dark" href="/Admin/Index">Admin Paneli</a>
+                                </div>
+                            }
+                        }
+
+
+                        @{
+                            FormsContext db = new FormsContext();
+                            var ustmenu = db.Forms.Where(a => a.UstId == null && a.Passive == false && a.Active == true).OrderBy(e => e.Sira).ToList();
+                            foreach (var item in ustmenu)
+                            {
+                                var altmenu = db.Forms.Where(a => a.UstId == item.FormId && a.Passive == false && a.Active == true).OrderBy(e => e.Sira).ToList();
+                                if (altmenu.Count == 0)
+                                {
+                                    <div class="nav-item">
+                                        <a class="nav-link text-dark" href="@item.FormUrl">@item.FormName</a>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" @item.FormId
+                                           role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            @item.FormName
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown" @item.FormId>
+                                            @foreach (var item2 in altmenu)
+                                            {
+                                                <a class="dropdown-item" href="@item2.FormUrl">@item2.FormName</a>
+                                            }
+
+                                        </div>
+                                    </div>
+
+                                }
+                            }
+
+
+
+                        }
+
+                    </div>
+                    <ul class="nav navbar-nav flex-row justify-content-between ml-auto">
+                        @using System.Security.Claims;
+
+                        @{
+                            @try
+                            {
+                                string kuladi = User.FindFirstValue(ClaimTypes.Email).ToString();
+                                <li class="form-group">
+                                   
+                                        <small>
+                                            Hoşgeldiniz @kuladi
+
+                                            <center><a href="/Login/LogOut"   class="btn btn-primary btn-link" onclick="return confirm('Çıkış yapılsın mı?')">Çıkış Yap</a></center>
+                                        </small>
+                                    
+                                </li>
+
+                            }
+                            catch
+                            {
+
+                                <li class="dropdown order-1">
+                                    <button type="button" id="dropdownMenu1" data-toggle="dropdown" class="btn btn-outline-secondary dropdown-toggle">Giriş<span class="caret"></span></button>
+
+                                    <ul class="dropdown-menu dropdown-menu-right mt-1">
+                                        <li class="p-3">
+                                            <form class="form" role="form" method="post" action="/Login/Login">
+                                                <div class="form-group">
+                                                    <input id="UserEmail" placeholder="E-posta" name="UserEmail" class="form-control form-control-sm" type="text">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input id="UserPassword" placeholder="Parola" name="UserPassword" class="form-control form-control-sm" type="password">
+                                                </div>
+                                                <div class="form-group">
+                                                    <button type="submit" class="btn btn-primary btn-block">Giriş</button>
+                                                </div>
+                                                <div class="form-group text-xs-center">
+                                                    <small><a href="#">Parolamı unuttum</a></small>
+                                                    <small><a href="#">Kaydol</a></small>
+                                                </div>
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                            }
+
+                        }
+
+                        <li class="nav-item order-2 order-md-1"><a href="#" class="nav-link" title="settings"><i class="fa fa-cog fa-fw fa-lg"></i></a></li>
+
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2022 - Forms - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+

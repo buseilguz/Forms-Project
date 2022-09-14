@@ -1,0 +1,131 @@
+﻿@model Forms.Models.CyberAttack
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+<body>
+
+    <input type="image" src="~/print-icon.png" onclick=window.print(); value="Yazdır" />
+    <table border=1 bordercolor="Black">
+        <tr>
+            <td align="center" rowspan="7" width="200">
+                <img src="~/sdu.png" />
+            </td>
+        </tr>
+        <tr>
+            <td align="center" rowspan="7" width="390">
+
+                SÜLEYMAN DEMİREL ÜNİVERSİTESİ
+                <br />
+                Bilgi İşlem Daire Başkanlığı<br />
+                Olay Bildirim Formu
+            </td>
+
+        </tr>
+        <tr>
+            <td align="center" width="200">Döküman No</td>
+            <td align="center" width="200">FR-013</td>
+        </tr>
+        <tr>
+            <td align="center" width="200">İlk Yayın Tarihi</td>
+            <td align="center">16.11.2020</td>
+        </tr>
+        <tr>
+            <td align="center" width="200">Revizyon Tarihi</td>
+            <td align="center">16.11.2020</td>
+        </tr>
+        <tr>
+            <td align="center" width="200">Revizyon No</td>
+            <td align="center">000</td>
+        </tr>
+        <tr>
+            <td align="center" width="200">Sayfa No</td>
+            <td align="center">1/1</td>
+        </tr>
+    </table>
+    <br /><br />
+
+
+    <table border=1 bordercolor="Black">
+        <tr>
+            <td align="center" width="990"><h2>Siber Olay Bildirimi<h2></td>
+        </tr>
+        <tr>
+            <td width="1007" height="100">
+                <b>1.	Bildirimi Yapan Personelin</b>  <br /><br />
+
+                <b>Ad, Soyadı		:</b> @Html.DisplayFor(modelItem => modelItem.User.UserName) @Html.DisplayFor(modelItem => modelItem.User.UserSurname)<br />
+                <b>Unvan/Birim		:</b>  @Html.DisplayFor(modelItem => modelItem.User.UserTask)<br />
+                <b>Telefon		:</b> @Html.DisplayFor(modelItem => modelItem.User.UserPhone)<br />
+                <b>E-Posta 		: </b> @Html.DisplayFor(modelItem => modelItem.User.UserEmail)<br />
+
+
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                <br /> <b> Olay Türü: </b>
+                @Html.DisplayFor(modelItem => modelItem.Attack.AttackName)<br />
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                <br /><b>3.Olay sistem kesintisine sebep oldu mu? </b>
+
+                @{ if (Model.SystemOutage == true)
+                    {   
+                       <a>Evet</a><br />
+                    }
+                    else
+                    {
+                       <a>Hayır</a><br />
+                    }
+
+                        }
+               <br />
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                <b>4.	Olayın:</b><br />
+
+                <b> Tahmini başlangıç zamanı:</b><br /><br />
+                @Html.DisplayFor(modelItem => modelItem.StartDate)<br />
+
+                <b> Tespit edildiği zaman</b><br /><br />
+                <b>Tarih :</b> @Html.DisplayFor(modelItem => modelItem.DetectionDate)<br />
+
+            </td>
+
+        </tr>
+        <tr>
+            <td><b>5.Eklemek İstedikleriniz: </b><br /><br /> @Html.DisplayFor(modelItem => modelItem.Description)</td>
+
+        </tr>
+
+    </table>
+    <br /><br />
+    <table border="1">
+        <tr>
+            <td width="335" align="center">Hazırlayan</td>
+            <td width="330" align="center">Kontrol</td>
+            <td width="330" align="center">Onay</td>
+        </tr>
+        <tr>
+            <td height="70" align="center">Sürekli İşçi - Merve GÜNEŞ</td>
+            <td align="center">Öğretim Görevlisi - Gözde BİÇEN</td>
+            <td align="center">Doktor Öğretim Üyesi - Veli ÇAPALI</td>
+        </tr>
+    </table>
+
+
+</body>
+</html>

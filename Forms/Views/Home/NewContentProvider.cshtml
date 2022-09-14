@@ -1,0 +1,73 @@
+﻿@model Forms.Models.ContentProvider
+
+@{
+    ViewData["Title"] = "NewContentProvider";
+    
+}
+<style>
+    div {
+        table-layout: fixed;
+    
+        overflow: hidden;
+        text-overflow: Ellipsis;
+        Word-wrap: break-Word;
+    }
+</style>
+
+<h2>Yeni içerik sağlayıcı formu oluştur</h2>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="NewContentProvider">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="DomainName" class="control-label">İstek Yapılan Alan Adı</label>
+                <input asp-for="DomainName" class="form-control" />
+                <span asp-validation-for="DomainName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PurposeId" class="control-label">Kullanım Amacı</label>
+                <select asp-for="PurposeId" class="form-control" asp-items="ViewBag.PurposeId"></select>
+                <span asp-validation-for="PurposeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AuthorizedId" class="control-label">Yetkili kişi seçiniz</label>
+                <select asp-for="AuthorizedId" class="form-control" asp-items="ViewBag.AuthorizedId"></select>
+                <span asp-validation-for="AuthorizedId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DatabaseRequest" class="control-label">MySql Veritabanı İsteği Var mı?</label>
+
+                <select asp-for="DatabaseRequest" class="form-control">
+                    <option value="True">Evet </option>
+                    <option value="False">Hayır </option>
+                </select>
+                <span asp-validation-for="DatabaseRequest" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DatabaseUserName" class="control-label">MySql Kullanıcı Adı</label>
+                <input asp-for="DatabaseUserName" class="form-control" />
+                <span asp-validation-for="DatabaseUserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DatabasePassword" class="control-label">MySql Parola</label>
+                <input asp-for="DatabasePassword" class="form-control" />
+                <span asp-validation-for="DatabasePassword" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Date" class="control-label">Tarih</label>
+                <input asp-for="Date" class="form-control" />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Oluştur" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="btn btn-dribbble" asp-action="ContentProvider">Geri</a>
+</div>
+

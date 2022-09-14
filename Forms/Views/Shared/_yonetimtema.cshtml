@@ -1,0 +1,179 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Purple Admin</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="~/Admin/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="~/Admin/assets/vendors/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="~/Admin/assets/css/style.css">
+    <!-- End layout styles -->
+    <link rel="shortcut icon" href="~/Admin/assets/images/favicon.ico" />
+</head>
+<style>
+    button:focus {
+        outline: 0;
+    }
+
+    .navbar .dropdown-menu .form-control {
+        width: 200px;
+    }
+</style>
+<body>
+    <div class="container-scroller">
+        <!-- partial:../../partials/_navbar.html -->
+        <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+
+            <div class="navbar-menu-wrapper d-flex align-items-stretch">
+                <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+                    <span class="mdi mdi-menu"> Admin Paneli</span>
+                </button>
+
+                <ul class="navbar-nav navbar-nav-right">
+                    @using System.Security.Claims;
+
+                    @{
+
+                        string kuladi = User.FindFirstValue(ClaimTypes.Email).ToString();
+                        <li style="color:blueviolet">
+
+                            Hoşgeldiniz @kuladi
+
+                        </li>
+                    }
+
+
+                    <li class="nav-item d-none d-lg-block full-screen-link">
+                        <a class="nav-link">
+                            <i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
+                        </a>
+                    </li>
+
+
+                </ul>
+                <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+                    <span class="mdi mdi-menu"></span>
+                </button>
+            </div>
+        </nav>
+        <!-- partial -->
+        <div class="container-fluid page-body-wrapper">
+            <!-- partial:../../partials/_sidebar.html -->
+            <nav class="sidebar sidebar-offcanvas" id="sidebar">
+                <ul class="nav">
+
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Admin" asp-action="Index">
+                            <span class="menu-title">Admin Panel</span>
+                            <i class="mdi mdi-home menu-icon"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                            <span class="menu-title">Formlar</span>
+                            <i class="menu-arrow"></i>
+                            <i class="mdi mdi-crosshairs-gps menu-icon"></i>
+                        </a>
+                        <div class="collapse" id="ui-basic">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link" asp-controller="Admin" asp-action="CyberAttack">Siber Olay Bildirim Formu</a></li>
+                                <li class="nav-item"> <a class="nav-link" asp-controller="Admin" asp-action="ContentProvider">İçerik Sağlayıcı Formu</a></li>
+
+
+                            </ul>
+                        </div>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Admin" asp-action="Forms">
+                            <span class="menu-title">Form İşlemleri</span>
+                            <i class="mdi mdi-contacts menu-icon"></i>
+                        </a>
+                    </li>
+
+
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#general-pages" aria-expanded="false" aria-controls="general-pages">
+                            <span class="menu-title">Kullanıcı İşlemleri</span>
+                            <i class="menu-arrow"></i>
+                            <i class="mdi mdi-medical-bag menu-icon"></i>
+                        </a>
+                        <div class="collapse" id="general-pages">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link" asp-controller="Admin" asp-action="Users">Tüm  Kullanıcılar</a></li>
+                                <li class="nav-item"> <a class="nav-link" asp-controller="Admin" asp-action="MyInformation">Bilgilerim</a></li>
+
+
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Login" asp-action="LogOut" onclick="return confirm('Çıkış Yapılsın mı?')">
+                            <span class="menu-title">Çıkış Yap</span>
+                            <i class="mdi mdi-contacts menu-icon"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item sidebar-actions">
+
+                    </li>
+                </ul>
+            </nav>
+            <!-- partial -->
+            <div class="main-panel"   style="overflow-x: scroll;">
+                <div class="content-wrapper">
+                    <div class="page-header">
+                      
+                        <nav aria-label="breadcrumb">
+                            <a href="/Admin/CyberAttack" class="btn btn-primary" value="Siber Olay Bildirimlerim">Siber Olay Bildirimleri</a>
+                            <a href="/Admin/ContentProvider" class="btn btn-primary" value="Siber Olay Bildirimlerim">İçerik Sağlama Talepleri</a>
+                        </nav>
+                    </div>
+                    <div class="row">
+
+                        @RenderBody()
+
+
+
+                    </div>
+                </div>
+                <!-- content-wrapper ends -->
+                <!-- partial:../../partials/_footer.html -->
+                <footer class="footer">
+                    <div class="container-fluid d-flex justify-content-between">
+                        <span class="text-muted d-block text-center text-sm-start d-sm-inline-block"></span>
+                        <span class="float-none float-sm-end mt-1 mt-sm-0 text-end">  <a href="https://www.bootstrapdash.com/bootstrap-admin-template/" target="_blank"></a></span>
+                    </div>
+                </footer>
+                <!-- partial -->
+            </div>
+            <!-- main-panel ends -->
+        </div>
+        <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="~/Admin/assets/vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="~/Admin/assets/js/off-canvas.js"></script>
+    <script src="~/Admin/assets/js/hoverable-collapse.js"></script>
+    <script src="~/Admin/assets/js/misc.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page -->
+    <!-- End custom js for this page -->
+
+</body>
+</html>

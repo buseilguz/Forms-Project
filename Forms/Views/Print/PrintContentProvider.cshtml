@@ -1,0 +1,294 @@
+﻿@model Forms.Models.ContentProvider
+
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+<body>
+    <input type="image" src="~/print-icon.png" onclick=window.print(); value="Yazdır" />
+    <table border=1 bordercolor="Black" style="font-size:14px;text-align:center">
+        <tr>
+            <td align="center" rowspan="7" width="200"><img src="~/sdu.png" /></td>
+        </tr>
+        <tr>
+            <td align="center" rowspan="7" width="390">
+                <b>
+                    SÜLEYMAN DEMİREL ÜNİVERSİTESİ<b>
+                        <br />
+                        Bilgi İşlem Daire Başkanlığı<br />
+                        Olay Bildirim Formu
+            </td>
+            <td align="center" width="200">Döküman No</td>
+            <td align="center" width="200">FR-011</td>
+
+        </tr>
+
+        <tr>
+            <td align="center" width="200">İlk Yayın Tarihi</td>
+            <td align="center">22.01.2020</td>
+        </tr>
+        <tr>
+            <td align="center" width="200">Revizyon Tarihi</td>
+            <td align="center">22.01.2020</td>
+        </tr>
+        <tr>
+            <td align="center" width="200">Revizyon No</td>
+            <td align="center">000</td>
+        </tr>
+        <tr>
+            <td align="center" width="200">Sayfa No</td>
+            <td align="center">1/1</td>
+        </tr>
+    </table>
+
+
+    <div style="text-align:justify ; font-size:12px">
+        <h4> Tanımlar</h4>
+        <b>İçerik Yönetim Sistemi:</b> Bilgilerin web ortamında yayımlanmasını, saklanmasını ve sonradan tekrar düzenlenmesini sağlayan bir web hizmetidir.<br />
+
+        <b>Birim/Bölüm Sorumlusu:</b> İçerik Yönetim Sisteminden sorumlu Daire Başkanı, Dekan, Yüksekokul Müdürü, Enstitü Müdürü, Bölüm Başkanı, Fakülte Sekreteri, Yüksekokul Sekreterlerinden biri olmalıdır.<br />
+        <b> İçerik Yönetim Sorumlusu:</b> İçerik Yönetim Sistemine içeriği giren veya var olan içeriği güncelleyen, Birim/Bölüm Sorumlusu tarafından belirlenen kişidir.<br />
+        <b> Kimlik Sistemi: </b>Kurumsal Yazılım Yetkilendirme Sistemi<br />
+
+        <h4>Kullanım Sözleşmesi</h4>
+    </div>
+    <ol style="font-size:12px;text-align:justify;">
+        <li>
+            İçerik Yönetim Sorumlusu, Birim/Bölüm Sorumlusu tarafından belirlenir. İçerik Yönetim Sorumlusu tarafından İçerik Yönetim Sistemi Talep Formunun ve Kullanım sözleşmesinin doldurulmasından sonra Bilgi İşlem Daire Başkanlığı tarafından yetkilendirme yapılarak ilgili sorumluya kullanıcı adı ve parola bilgileri elden kapalı bir zarf ile teslim edilir.
+        </li>
+        <li>
+            Sadece Süleyman Demirel Üniversitesi personeli İçerik Yönetimi Sorumlusu olabilir.
+        </li>
+        <li>
+            Alan isimleri sürekli kullanım için verilmektedir. Kısa süreli etkinlikler için alan adı tahsisi yapılmaz.<br />
+            Kullanım amacı tabloda yer alan alanlar ile ilgili ise alınması gereken adres aşağıda yer almaktadır.
+            <table class="table" border="1" style="font-size:11px;text-align:center"  width="900">
+
+
+                <thead>
+                    <tr>
+                        <th><b>No</b></th>
+                        <th><b>Kullanım Amacı</b></th>
+                        <th><b>Kullanım Adı Adresi</b></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        FormsContext db = new FormsContext();
+                        var purposes = db.Purposes.ToList();
+                        foreach (var item in purposes)
+                        {
+                            <tr>
+                                <td>
+                                    <b>@Html.DisplayFor(modelItem => item.PurposeId)</b>
+                                </td>
+                                <td>
+                                    <b>@Html.DisplayFor(modelItem => item.PurposeName)</b>
+                                </td>
+                                <td>
+                                    <b>@Html.DisplayFor(modelItem => item.Address)</b>
+                                </td>
+                            </tr>
+                        }
+
+                    }
+                </tbody>
+                <table>
+        </li>
+
+
+
+
+        <li>
+
+            Bu formu dolduran kişiler verdikleri hizmetin türüne göre 04/05/2007 tarihli ve 5651 sayılı yasada tanımlanan Madde 5’te yer sağlayıcı yükümlülüklerinden ve/veya internet ortamı üzerinden kullanıcılara sunulan her türlü bilgi veya veriyi üretiyor, değiştiriyor ve sağlıyor ise Madde 4’te belirtilen İçerik Yönetim Sorumlusu yükümlülüklerinden sorumludurlar.
+        </li>
+        <li>
+            3. Maddede belirtilen kullanım alanları dışındaki (Bölüm, Birim vb.) web alanları yönetimi için Kimlik Sistemi kullanılacaktır. Bu şekilde kullanıcı dilediği zaman parolasını değiştirebileceği gibi, parolanın seçimi ve korunması tamamıyla kullanıcının sorumluluğundadır. Bilgi İşlem Daire Başkanlığı parola kullanımından doğacak problemlerden kesinlikle sorumlu değildir. Kullanıcı, kendi adına bağlı hesapların herhangi bir sebepten dolayı bloke olmasından dolayı Bilgi İşlem Daire Başkanlığına müracaat ederek kullanıma açtırabilir. Bloke olan hesap, Bilgi İşlem Daire Başkanlığı tarafından sıfırlanarak gerekli bilgiler kullanıcıya elden kapalı bir zarfla teslim edilir.
+        </li>
+        <li>
+            İçerik Yönetim Sorumlusu, hazırlamakla yükümlü olduğu web sayfasının içeriğinin eklenmesi, güncellemesi, kontrolünün yapılması, dosyaların düzenlenmesi ve bu sayfaların tutulduğu alanın kullanılmasından sorumludur. Dosyaların tutulduğu bu alanı, yedekleme amacıyla kullanmamak, gereksiz dosyaları silmek, dosya boyutlarını kontrol ederek web ortamına uygun hale getirmek ve bu alanda site sayfaları dışında dosya barındırmamakla sorumludur.
+
+        <li>
+            Bilgi İşlem Daire Başkanlığı dosyaların tutulduğu alanın gereksiz kullanımı ve sunucu üzerinde trafiğin oluşturulmasından kaynaklanan problemlerde ilgili sorumluyu uyarabileceği gibi web alanına sınırlama da getirebilir.
+        </li>
+        <li>
+            Bilgi İşlem Daire Başkanlığı Birim/Bölüm web sayfalarına içerik girme veya güncelleme işlemlerinde bulunmaz web sayfalarında yayımlanan içerik ve dosyalardan tamamen ilgili birimin İçerik Yönetim Sorumlusu olarak belirtilmiş kişi sorumludur.
+        </li>
+        <li>
+            Birim/Bölüm Sorumlusu ve İçerik Yönetim Sorumlusunun görev değişikliği veya görevden ayrılması halinde Bilgi İşlem Daire Başkanlığına bildirilmesi gerekmektedir.
+        </li>
+        <li>
+            İçerik Yönetim Sistemi, Bilgi İşlem Daire Başkanlığı tarafından geliştirilen bir şablon üzerinde hizmet vermektedir. Bu anlamda sistemin kısıtları olduğu bilinmelidir.
+        </li>
+        <li>
+            Daha önceden tanımlanmış bir web alanı olmaması halinde web alanı sadece sdu.edu.tr olarak verilir. Web alanı talep eden kullanıcı Süleyman Demirel Üniversitesinin yönetmeliklerine ve Bilgi İşlem Daire Başkanlığının politika ve prosedürlerine uymayı taahhüt eder.
+        </li>
+        <li>
+            İçerik Yönetim Sisteminin kullanılması sırasında kaybolan, değiştirilen veya silinen içeriklerden Bilgi İşlem Daire Başkanlığı sorumlu değildir. İçeriklerin yedeklenmesi İçerik Yönetim Sorumlusunun yetkisindedir.
+        </li>
+        <li>
+            Süleyman Demirel Üniversitesi Bilgi İşlem Daire Başkanlığı, Birim/Bölüm Sorumlularını e-posta yoluyla bilgilendirilerek sözleşmede değişiklik yapma hakkına sahiptir. Ayrıca, servisin verildiği sunucular üzerinde herhangi bir zamanda teknik değişiklikler yapabilir. Bu değişiklikler yapılmadan önce kullanıcılara haber verilebileceği gibi bazı durumlarda haber vermek mümkün olmayabilir. Haberleşme, ilgili sorumlulara e-posta gönderilerek sağlanır.
+        </li>
+        <li>
+            Tahsis edilen alanların kullanımında ayrıca Bilgi ve İşlem Varlıkları Kullanım İlkeleri Yönergesi kuralları geçerlidir. İçerik Yönetim Sorumlusu bu kuralların tümünü kabul etmiş sayılır. Bu kurallara Bilgi İşlem Daire Başkanlığı sayfasından (<u>http://bidb.sdu.edu.tr</u>) ulaşılabilir.
+        </li>
+
+        <br /> Birim/Bölüm Sorumlusu, yukarıdaki sözleşmede bahsedilen maddeleri ve gerekli bilgileri İçerik Yönetim Sorumlusuna verilmesini kabul eder. Doldurduğunuz formu imzalayarak resmi yazı ile Bilgi İşlem Daire Başkanlığına ulaştırınız.
+    </ol>
+
+    <br /> <b style="font-size:10px">Birim/Bölüm Adı:</b>
+    <br>
+
+    <table border="1" style="font-size:14px;text-align:center"  width="900">
+        <tr>
+            <td></td>
+            <td style="font-size:11px"><b>İçerik Yönetim Sorumlusu</b></td>
+            <td style="font-size:11px"><b>Birim/Bölüm Sorumlusu</b></td>
+        </tr>
+        <tr>
+            <td><b>Adı Soyadı</b></td>
+            <td>@Html.DisplayFor(modelItem => modelItem.User.UserName)  @Html.DisplayFor(modelItem => modelItem.User.UserSurname)</td>
+            <td>
+                @{
+                    var yetkili = db.Users.Where(a => a.UserId == Model.AuthorizedId).FirstOrDefault();
+                }
+                @yetkili.UserName @yetkili.UserSurname
+            </td>
+        </tr>
+        <tr>
+            <td><b>Ünvanı/Görevi</b></td>
+            <td> @Html.DisplayFor(modelItem => modelItem.User.UserTask)</td>
+            <td>@yetkili.UserTask</td>
+        </tr>
+
+        <tr>
+            <td><b>E-Posta</b></td>
+            <td>@Html.DisplayFor(modelItem => modelItem.User.UserEmail)</td>
+            <td>@yetkili.UserEmail</td>
+        </tr>
+
+        <tr>
+            <td><b>İş Telefonu</b></td>
+            <td>@Html.DisplayFor(modelItem => modelItem.User.UserPhone)</td>
+            <td>@yetkili.UserPhone</td>
+        </tr>
+
+        <tr>
+            <td><b>Cep Telefonu</b></td>
+            <td>@Html.DisplayFor(modelItem => modelItem.User.UserMobilePhone)</td>
+            <td>@yetkili.UserMobilePhone</td>
+        </tr>
+
+        <tr>
+            <td><b>İstek Yapılan Alan Adı</b></td>
+            <td> @Html.DisplayFor(modelItem => modelItem.DomainName)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><b>Kullanım Amacı</b></td>
+            <td>@Html.DisplayFor(modelItem => modelItem.Purpose.PurposeName)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>
+                <b>MySql Veritabanı İsteği:</b><br>
+                @{ if (Model.DatabaseRequest == true)
+                    {
+                        <a>Evet</a><br />
+                    }
+                    else
+                    {
+                        <a>Hayır</a><br />
+                    }
+
+                }
+
+
+            </td>
+
+            <td>
+                @{ if (Model.DatabaseRequest == true)
+                    {
+                        <a>MySql Kullanıcı Adı:</a> @Html.DisplayFor(modelItem => modelItem.DatabaseUserName)
+                    }
+
+
+                }
+            </td>
+            <td>
+                @{ if (Model.DatabaseRequest == true)
+                    {
+                        <a>MySql Parola :</a> @Html.DisplayFor(modelItem => modelItem.DatabasePassword)
+                    }
+
+
+                }
+            </td>
+        </tr>
+
+        <tr>
+            <td><b>Tarih</b></td>
+            <td> @Html.DisplayFor(modelItem => modelItem.Date)</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td height="50"><b>İmza</b></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <br />
+    <br />
+    <footer>
+        <table border="1" style="font-size:15px;text-align:center;">
+            <tr>
+                <td width="335" align="center">Hazırlayan</td>
+                <td width="330" align="center">Kontrol</td>
+                <td width="330" align="center">Onay</td>
+            </tr>
+            <tr>
+                <td height="70" align="center">Sürekli İşçi - Merve GÜNEŞ</td>
+                <td align="center">Öğretim Görevlisi - Gözde BİÇEN</td>
+                <td align="center">Doktor Öğretim Üyesi - Veli ÇAPALI</td>
+            </tr>
+        </table>
+    </footer>
+
+
+</body>
+</html>

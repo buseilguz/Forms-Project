@@ -1,0 +1,105 @@
+﻿@model IEnumerable<Forms.Models.ContentProvider>
+
+@{
+    ViewData["Title"] = "ContentProvider";
+    
+}
+
+
+<style>
+    table {
+        table-layout: fixed;
+    }
+    td {
+        overflow: hidden;
+        text-overflow: Ellipsis;
+        Word-wrap: break-Word;
+    }
+</style>
+
+<p>
+    <a class="btn btn-success" asp-action="NewContentProvider" >Yeni içerik sağlayıcı formu oluştur.</a>
+</p>
+<h2>İçerik Sağlayıcılar</h2>
+<table class="table" >
+    <thead>
+        <tr>
+            <th>
+               ID
+            </th>
+            <th>
+               Adı
+            </th>
+            <th>
+                Soyadı
+            </th>
+            <th>
+               İstek Yapılan Alan Adı
+            </th>
+            <th>
+               Kullanım Amacı
+            </th>
+            <th>
+                Yetkili Kişi
+            </th>
+            <th>
+               MySql Veritabanı İsteği Var mı?
+            </th>
+            <th>
+               MySql Kullanıcı Adı
+            </th>
+            <th>
+                MySql Parola
+            </th>
+            <th>
+                Tarih
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContentProviderId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.UserSurname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DomainName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Purpose.PurposeName)
+            </td>
+            <td>
+                @{FormsContext db = new FormsContext();
+                    var yetkili = db.Users.Where(a => a.UserId == item.AuthorizedId).FirstOrDefault();
+            }
+            @yetkili.UserName @yetkili.UserSurname
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DatabaseRequest)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DatabaseUserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DatabasePassword)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            <a class="btn btn-dribbble" asp-action="GetContentProvider" asp-route-id="@item.ContentProviderId">Düzenle</a>
+            <a class="btn btn-gradient-dark" asp-controller="Print" asp-action="PrintContentProvider" asp-route-id="@item.ContentProviderId">Çıktı Al |</a>
+            <a class="btn btn-gradient-success" asp-action="DeleteContentProvider" asp-route-id="@item.ContentProviderId" onclick="return confirm('Siber Olay Bildirimi Silinsin mi?')">Sil</a>
+
+        </td>
+        </tr>
+}
+    </tbody>
+</table>

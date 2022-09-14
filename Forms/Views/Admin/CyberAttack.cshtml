@@ -1,0 +1,82 @@
+﻿@model IEnumerable<Forms.Models.CyberAttack>
+
+@{
+    ViewData["Title"] = "CyberAttack";
+    Layout = "~/Views/Shared/_yonetimtema.cshtml";
+}
+
+
+<p>
+    <a class="btn btn-success" asp-action="NewCyberAttack">Siber Olay Oluştur</a>
+</p>
+<h2>Siber Olaylar</h2>
+
+<table class="table col-md-6">
+    <thead>
+        <tr>
+            <th>
+                Siber Olay ID
+            </th>
+            <th>
+                Oluşturan
+            </th>
+            <th>
+                Kullanıcı
+            </th>
+            <th>
+                Olay Türü
+            </th>
+            <th>
+                Sistem Kesinti Durumu
+            </th>
+            <th>
+                Tahmini Başlangıç Zamanı
+            </th>
+            <th>
+                Tespit Edildiği Zaman
+            </th>
+            <th>
+                Eklemek İstedikleriniz
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CybetAttackId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User.UserSurname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Attack.AttackName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SystemOutage)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DetectionDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    <a class="btn btn-dribbble" asp-action="GetCyberAttack" asp-route-id="@item.CybetAttackId">Düzenle |</a>
+                    <a class="btn btn-gradient-dark" asp-controller="Print" asp-action="PrintCyberAttack" asp-route-id="@item.CybetAttackId">Çıktı Al |</a>
+                    <a class="btn btn-gradient-success" asp-action="DeleteCyberAttack" asp-route-id="@item.CybetAttackId" onclick="return confirm('Siber Olay Bildirimi Silinsin mi?')">Sil |</a>
+
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

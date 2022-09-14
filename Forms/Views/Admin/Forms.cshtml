@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Forms.Models.Form>
+
+@{
+    ViewData["Title"] = "Forms";
+    Layout = "~/Views/Shared/_yonetimtema.cshtml";
+}
+<style>
+    table {
+        table-layout: fixed;
+    }
+
+    td {
+        overflow: hidden;
+        text-overflow: Ellipsis;
+        Word-wrap: break-Word;
+    }
+</style>
+
+
+<p>
+    <a class="btn btn-success" asp-action="CreateForm">Yeni Form Ekle</a>
+</p>
+<h2>Formlar</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Form ID
+            </th>
+            <th>
+                Form Adı
+            </th>
+            <th>
+                Form Url
+            </th>
+
+
+            <th>
+                @Html.DisplayNameFor(model => model.Active)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FormId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FormName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FormUrl)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Active)
+                </td>
+
+                <td>
+                    <a class="btn btn-gradient-success" asp-action="GetForm" asp-route-id="@item.FormId">Düzenle |</a>
+                    <a class="btn btn-gradient-success" asp-action="DeleteForm" asp-route-id="@item.FormId" onclick="return confirm('Form silinsin mi?')">|Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
